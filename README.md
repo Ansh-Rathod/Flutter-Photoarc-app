@@ -8,7 +8,7 @@ A Fully functional social media app written in flutter and dart using node.js an
 <p align="center">
 <img src="screenshots/Screenshot_20211119-194607.png" alt="logo" width="30%"/>
 
-<h3 align="center">Download the release APK</h3>
+<h3 align="center"><a href="https://github.com/Ansh-Rathod/Flutter-Social-media-photoarc-app/releases/download/v1.0.0/app-armeabi-v7a-release.apk">Download the release APK</a></h3>
 </p>
 
 ## **Features**
