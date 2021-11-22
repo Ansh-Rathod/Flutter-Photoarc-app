@@ -5,11 +5,11 @@ A Fully functional social media app written in flutter and dart using node.js an
 
 ## **Demo**
 
-<center>
+<p align="center">
 <img src="screenshots/Screenshot_20211119-194607.png" alt="logo" width="30%"/>
 
-<h3 style="color:green;">Download the release APK</h3>
-</center>
+<h3 align="center">Download the release APK</h3>
+</p>
 
 ## **Features**
 
@@ -51,44 +51,44 @@ A Fully functional social media app written in flutter and dart using node.js an
 
 <br>
 
-<center>
+<p align="center">
 <img src="screenshots/20211122_171350.gif" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-170954.jpg" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-173452.jpg" alt="Gallery Image" width="30%" />
-</center>
+</p>
 <hr/>
 
 ### **Search page**
 
 <br>
 
-<center>
+<p align="center">
 <img src="screenshots/20211122_172256.gif" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-173514.jpg" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-172157.jpg" alt="Gallery Image" width="30%" />
-</center>
+</p>
 <hr/>
 
 ### **Activity page**
 
 <br>
 
-<center>
+<p align="center">
 <img src="screenshots/20211122_172832.gif" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-172659.jpg" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-173528.jpg" alt="Gallery Image" width="30%" />
-</center>
+</p>
 <hr/>
 
 ### **Profile page**
 
 <br>
 
-<center>
+<p align="center">
 <img src="screenshots/20211122_173115.gif" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-173536.jpg" alt="Gallery Image" width="30%" />
 <img src="screenshots/Screenshot_20211122-173550.jpg" alt="Gallery Image" width="30%" />
-</center>
+</p>
 <hr/>
 
 ## **Dependencies**
