@@ -90,20 +90,6 @@ A Fully functional social media app written in flutter and dart using node.js an
 </center>
 <hr/>
 
-### **Other pages**
-
-<br>
-
-<center>
-<img src="screenshots/Screenshot_20211122-175449.jpg" alt="Gallery Image" width="30%" />
-<img src="screenshots/Screenshot_20211122-175456.jpg" alt="Gallery Image" width="30%" />
-<img src="screenshots/Screenshot_20211122-175505.jpg" alt="Gallery Image" width="30%" />
-<img src="screenshots\Screenshot_20211122-171645_Android System.jpg" alt="Gallery Image" width="30%" />
-<img src="screenshots/Screenshot_20211122-175554.jpg" alt="Gallery Image" width="30%" />
-<img src="screenshots/Screenshot_20211122-175517.jpg" alt="Gallery Image" width="30%" />
-</center>
-<hr/>
-
 ## **Dependencies**
 
 - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
