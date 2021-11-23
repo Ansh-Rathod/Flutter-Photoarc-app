@@ -200,9 +200,9 @@ void showNotification(v, flp) async {
   var android = const AndroidNotificationDetails(
     'Photoarc-ansh-rathod',
     'Follow and comments notifications',
-    priority: Priority.low,
-    importance: Importance.low,
-    channelAction: AndroidNotificationChannelAction.update,
+    priority: Priority.defaultPriority,
+    importance: Importance.defaultImportance,
+    enableVibration: false,
   );
   var iOS = const IOSNotificationDetails();
   var platform = NotificationDetails(android: android, iOS: iOS);
@@ -220,13 +220,19 @@ void callbackDispatcher() {
     var initSetttings = InitializationSettings(android: android, iOS: iOS);
     flp.initialize(initSetttings);
     final repo = GetNotifications();
-    final result = await repo
-        .getNotifications(genrateId(FirebaseAuth.instance.currentUser!.uid));
 
-    if (result.isNotEmpty) {
-      showNotification(
-          "You have some notifications in your activity feed.", flp);
+    try {
+      final result = await repo
+          .getNotifications(genrateId(FirebaseAuth.instance.currentUser!.uid));
+      print(result);
+      if (result.isNotEmpty) {
+        showNotification(
+            "You have some notifications in your activity feed.", flp);
+      }
+    } catch (e) {
+      print(e.toString());
     }
+
     return Future.value(true);
   });
 }
