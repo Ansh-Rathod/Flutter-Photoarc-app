@@ -80,19 +80,33 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 activeColor: Theme.of(context).primaryColor,
                 currentIndex: currentIndex,
                 iconSize: 26.0,
-                items: const [
-                  BottomNavigationBarItem(
+                items: [
+                  const BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.home),
                     activeIcon: Icon(CupertinoIcons.house_fill),
                   ),
-                  BottomNavigationBarItem(
+                  const BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.search),
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(CupertinoIcons.bell),
-                    activeIcon: Icon(CupertinoIcons.bell_solid),
+                    icon: !state.isNote
+                        ? const Icon(CupertinoIcons.bell)
+                        : InkWell(
+                            onTap: () {
+                              BlocProvider.of<CurrentUserCubit>(context)
+                                  .changeIcon();
+                              setState(() {
+                                currentIndex = 2;
+                              });
+                            },
+                            child: const Icon(
+                              CupertinoIcons.bell,
+                              color: Colors.orange,
+                            ),
+                          ),
+                    activeIcon: const Icon(CupertinoIcons.bell_solid),
                   ),
-                  BottomNavigationBarItem(
+                  const BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.person),
                     activeIcon: Icon(CupertinoIcons.person_fill),
                   ),

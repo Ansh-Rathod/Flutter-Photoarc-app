@@ -136,7 +136,8 @@ class _CommentScreenState extends State<CommentScreen> {
                       ),
                       decoration: InputDecoration(
                         hintText: "Add comment",
-                        contentPadding: const EdgeInsets.all(8),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
                         suffixIcon: GestureDetector(
                           onTap: () {
                             BlocProvider.of<CommentsCubit>(context).addComment(

@@ -199,13 +199,14 @@ const simplePeriodicTask = "simplePeriodicTask";
 void showNotification(v, flp) async {
   var android = const AndroidNotificationDetails(
     'Photoarc-ansh-rathod',
-    'Follow/Comments',
+    'Follow and comments notifications',
     priority: Priority.low,
     importance: Importance.low,
+    channelAction: AndroidNotificationChannelAction.update,
   );
   var iOS = const IOSNotificationDetails();
   var platform = NotificationDetails(android: android, iOS: iOS);
-  await flp.show(0, 'Photoarc', '$v', platform, payload: 'VIS \n $v');
+  await flp.show(0, 'Photoarc', '$v', platform, payload: 'Photoarc');
 }
 
 void callbackDispatcher() {
@@ -223,10 +224,6 @@ void callbackDispatcher() {
         .getNotifications(genrateId(FirebaseAuth.instance.currentUser!.uid));
 
     if (result.isNotEmpty) {
-      showNotification(
-          "You have some notifications in your activity feed.", flp);
-    } else {
-      print("is empty");
       showNotification(
           "You have some notifications in your activity feed.", flp);
     }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:social_media/logger.dart';
 import '../api/url.dart';
 import '../models/user_model.dart';
 import 'genrate_user_id.dart';
@@ -18,7 +19,7 @@ class UpdateLikes {
           "liker_id": likerid,
           "post_id": postid,
         }));
-    // logger.d(jsonDecode(res.body));
+    logger.d(jsonDecode(res.body));
   }
 
   Future<void> removelike(String uid, String postid, String likerid) async {
@@ -31,7 +32,7 @@ class UpdateLikes {
           "liker_id": likerid,
           "post_id": postid,
         }));
-    // logger.d(jsonDecode(res.body));
+    logger.d(jsonDecode(res.body));
   }
 
   Future<List<UserModel>> getLikes(String uid, String postid) async {

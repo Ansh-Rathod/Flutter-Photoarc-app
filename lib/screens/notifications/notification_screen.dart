@@ -188,12 +188,7 @@ class NotificationPage extends StatelessWidget {
                                             ),
                                         children: [
                                           TextSpan(
-                                              text: notification.type ==
-                                                      'FOLLOW'
-                                                  ? 'Started following you'
-                                                  : 'commented on your post "' +
-                                                      notification.comment +
-                                                      '"'),
+                                              text: buildText(notification)),
                                           TextSpan(
                                             style: Theme.of(context)
                                                 .textTheme
@@ -211,15 +206,8 @@ class NotificationPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-
-                                    // Text(
-
-                                    //   style: const TextStyle(
-                                    //     color: Colors.white,
-                                    //     fontSize: 16,
-                                    //   ),
-                                    // ),
-                                    trailing: notification.type == 'COMMENT'
+                                    trailing: notification.type == 'COMMENT' ||
+                                            notification.type == 'LIKE'
                                         ? GestureDetector(
                                             onTap: () {
                                               Navigator.of(context).push(
@@ -265,5 +253,17 @@ class NotificationPage extends StatelessWidget {
         )),
       ),
     );
+  }
+
+  String buildText(NotificationModel notification) {
+    if (notification.type == 'FOLLOW') {
+      return 'Started following you';
+    } else if (notification.type == 'COMMENT') {
+      return 'commented on your post "' + notification.comment + '"';
+    } else if (notification.type == 'LIKE') {
+      return 'liked your post';
+    } else {
+      return 'shared your post';
+    }
   }
 }
