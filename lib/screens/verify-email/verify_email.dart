@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_media/screens/create-user/create_user.dart';
 
 import '../../animation.dart';
@@ -72,6 +73,9 @@ class VerifyEmail extends StatelessWidget {
                     user = FirebaseAuth.instance.currentUser;
 
                     if (user!.emailVerified) {
+                      SharedPreferences prefrences =
+                          await SharedPreferences.getInstance();
+                      await prefrences.setBool('verify', true);
                       Navigator.of(context).pushReplacement(
                         createRoute(
                           const CreateUser(),

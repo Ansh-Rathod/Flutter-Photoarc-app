@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -226,7 +227,10 @@ class Settings extends StatelessWidget {
                         SharedPreferences prefrences =
                             await SharedPreferences.getInstance();
                         await prefrences.remove('isLogin');
-
+                        await prefrences.remove('verify');
+                        await prefrences.remove('createuser');
+                        var box = Hive.box('notifications');
+                        await box.clear();
                         Future.delayed(const Duration(microseconds: 500), () {
                           Phoenix.rebirth(context);
                         });

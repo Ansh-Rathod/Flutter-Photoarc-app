@@ -48,7 +48,10 @@ dependencies:
   url_launcher: ^6.0.13
   flutter_phoenix: ^1.0.0
   font_awesome_flutter: ^9.2.0
-
+  hive_flutter: ^1.1.0
+  path_provider: ^2.0.7
+  flutter_local_notifications: ^9.1.4
+  workmanager: ^0.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

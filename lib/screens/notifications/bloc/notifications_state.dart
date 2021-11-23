@@ -12,9 +12,9 @@ class NotificationsInitial extends NotificationsState {}
 class NotificationsLoading extends NotificationsState {}
 
 class NotificationsLoaded extends NotificationsState {
-  final List<NotificationModel> notifications;
+  final old;
   const NotificationsLoaded({
-    required this.notifications,
+    required this.old,
   });
 }
 

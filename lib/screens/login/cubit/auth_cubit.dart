@@ -17,7 +17,9 @@ class AuthCubit extends Cubit<AuthState> {
       ));
       await repo.login(email, password);
       SharedPreferences prefrences = await SharedPreferences.getInstance();
-      prefrences.setBool('isLogin', true);
+      await prefrences.setBool('isLogin', true);
+      await prefrences.setBool('verify', true);
+      await prefrences.setBool('createuser', true);
       emit(state.copyWith(status: AuthStatus.logInSuccess));
     } on ErrorModel catch (e) {
       // print(e.code);

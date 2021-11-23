@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../repo/create_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -28,6 +29,8 @@ class CreateUserCubit extends Cubit<CreateUserState> {
               status: UserStatus.error, error: 'INTERNAL SERVER ERROR'),
         );
       } else if (code == 202) {
+        SharedPreferences prefrences = await SharedPreferences.getInstance();
+        await prefrences.setBool('createuser', true);
         emit(state.copyWith(status: UserStatus.success));
       }
     } catch (e) {

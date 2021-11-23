@@ -35,7 +35,8 @@ class ShowUserList extends StatelessWidget {
               ),
             );
           },
-          contentPadding: const EdgeInsets.all(8),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           leading: UserProfile(
             url: users[index].avatarUrl,
             size: 50,

@@ -70,7 +70,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     width: .4,
                   ),
                 ),
-                backgroundColor: Colors.transparent,
+                backgroundColor: Colors.black,
                 onTap: (index) {
                   setState(() {
                     currentIndex = index;
@@ -101,13 +101,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
             );
           } else if (state.status == CurrentUserStatus.error) {
             return Center(
-                child: Text(
-                  "Something went wrong",
-                  style: Theme.of(context).textTheme.headline1!.copyWith(
-                        fontSize: 24,
-                      ),
-                ),
-              );
+              child: Text(
+                "Something went wrong",
+                style: Theme.of(context).textTheme.headline1!.copyWith(
+                      fontSize: 24,
+                    ),
+              ),
+            );
           } else {
             return Container();
           }

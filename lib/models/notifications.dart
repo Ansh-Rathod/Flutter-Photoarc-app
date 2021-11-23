@@ -23,7 +23,7 @@ class NotificationModel {
   late final String name;
   late final String avatarUrl;
 
-  NotificationModel.fromJson(Map<String, dynamic> json) {
+  NotificationModel.fromJson(json) {
     notificationId = json['notification_id'];
     comment = json['comment'] ?? '';
     postId = json['post_id'] ?? '';

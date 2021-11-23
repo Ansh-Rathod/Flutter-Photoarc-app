@@ -24,7 +24,7 @@ class PostModel {
   late final String name;
   late final String avatarUrl;
 
-  PostModel.fromJson(Map<String, dynamic> json) {
+  PostModel.fromJson(json) {
     postId = json['post_id'] ?? '';
     postImageUrl = json['post_image_url'] ?? '';
     caption = json['caption'] ?? '';

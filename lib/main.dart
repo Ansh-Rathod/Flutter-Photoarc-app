@@ -1,23 +1,53 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:social_media/colors.dart';
+import 'package:social_media/repo/genrate_user_id.dart';
+import 'package:social_media/repo/get_notifications.dart';
 import 'package:social_media/screens/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:social_media/screens/create-user/create_user.dart';
 import 'package:social_media/screens/login/login_page.dart';
+import 'package:social_media/screens/verify-email/verify_email.dart';
+import 'package:workmanager/workmanager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  var dir = await getApplicationDocumentsDirectory();
+  await Hive.initFlutter(dir.path);
+  await Hive.openBox('notifications');
+  await Workmanager().initialize(callbackDispatcher);
+  await Workmanager().registerPeriodicTask(
+    "5",
+    simplePeriodicTask,
+    existingWorkPolicy: ExistingWorkPolicy.replace,
+    frequency: const Duration(minutes: 15),
+    initialDelay: const Duration(seconds: 10),
+    constraints: Constraints(
+      networkType: NetworkType.connected,
+    ),
+  );
   SharedPreferences prefrences = await SharedPreferences.getInstance();
   bool? islogin = prefrences.getBool('isLogin');
+  bool? isverify = prefrences.getBool('verify');
+  bool? iscreateUser = prefrences.getBool('createuser');
   runApp(
     Phoenix(
       child: MyApp(
+        isverify: isverify,
+        iscreateUser: iscreateUser,
         isLogin: islogin,
       ),
     ),
@@ -26,9 +56,14 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final bool? isLogin;
+  final bool? isverify;
+  final bool? iscreateUser;
+
   const MyApp({
     Key? key,
     this.isLogin,
+    this.isverify,
+    this.iscreateUser,
   }) : super(key: key);
 
   // This widget is the root of your application.
@@ -130,8 +165,20 @@ class MyApp extends StatelessWidget {
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         );
       },
-      home: isLogin != null ? const BottomNavBar() : const AuthPage(),
+      home: getHomeScreen(),
     );
+  }
+
+  getHomeScreen() {
+    if (isLogin != null && isverify == null) {
+      return const VerifyEmail();
+    } else if (isLogin != null && isverify != null && iscreateUser == null) {
+      return const CreateUser();
+    } else if (isLogin != null && isverify != null && iscreateUser != null) {
+      return const BottomNavBar();
+    } else {
+      return const AuthPage();
+    }
   }
 }
 
@@ -144,4 +191,45 @@ class NoGlowBehavior extends ScrollBehavior {
   ) {
     return child;
   }
+}
+
+//this is the name given to the background fetch
+const simplePeriodicTask = "simplePeriodicTask";
+// flutter local notification setup
+void showNotification(v, flp) async {
+  var android = const AndroidNotificationDetails(
+    'Photoarc-ansh-rathod',
+    'Follow/Comments',
+    priority: Priority.low,
+    importance: Importance.low,
+  );
+  var iOS = const IOSNotificationDetails();
+  var platform = NotificationDetails(android: android, iOS: iOS);
+  await flp.show(0, 'Photoarc', '$v', platform, payload: 'VIS \n $v');
+}
+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    await Firebase.initializeApp();
+
+    FlutterLocalNotificationsPlugin flp = FlutterLocalNotificationsPlugin();
+    var android =
+        const AndroidInitializationSettings('@drawable/ic_stat_letter_p');
+    var iOS = const IOSInitializationSettings();
+    var initSetttings = InitializationSettings(android: android, iOS: iOS);
+    flp.initialize(initSetttings);
+    final repo = GetNotifications();
+    final result = await repo
+        .getNotifications(genrateId(FirebaseAuth.instance.currentUser!.uid));
+
+    if (result.isNotEmpty) {
+      showNotification(
+          "You have some notifications in your activity feed.", flp);
+    } else {
+      print("is empty");
+      showNotification(
+          "You have some notifications in your activity feed.", flp);
+    }
+    return Future.value(true);
+  });
 }

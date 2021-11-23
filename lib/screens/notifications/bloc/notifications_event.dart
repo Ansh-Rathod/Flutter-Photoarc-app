@@ -24,3 +24,8 @@ class DeleteNotifications extends NotificationsEvent {
     required this.notificationId,
   });
 }
+
+class DeleteAllNotifications extends NotificationsEvent {
+  final String userId;
+  const DeleteAllNotifications({required this.userId});
+}
