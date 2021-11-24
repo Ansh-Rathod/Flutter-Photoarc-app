@@ -196,16 +196,19 @@ class NoGlowBehavior extends ScrollBehavior {
 //this is the name given to the background fetch
 const simplePeriodicTask = "simplePeriodicTask";
 // flutter local notification setup
-void showNotification(v, flp) async {
+void showNotification(v, FlutterLocalNotificationsPlugin flp) async {
   var android = const AndroidNotificationDetails(
     'Photoarc-ansh-rathod',
     'Follow and comments notifications',
     priority: Priority.defaultPriority,
     importance: Importance.defaultImportance,
     enableVibration: false,
+    playSound: false,
+    setAsGroupSummary: true,
   );
   var iOS = const IOSNotificationDetails();
   var platform = NotificationDetails(android: android, iOS: iOS);
+  // await flp.
   await flp.show(0, 'Photoarc', '$v', platform, payload: 'Photoarc');
 }
 
@@ -226,8 +229,9 @@ void callbackDispatcher() {
           .getNotifications(genrateId(FirebaseAuth.instance.currentUser!.uid));
       print(result);
       if (result.isNotEmpty) {
-        showNotification(
-            "You have some notifications in your activity feed.", flp);
+        String text = buildnotification(result);
+        print(text);
+        showNotification(text, flp);
       }
     } catch (e) {
       print(e.toString());
@@ -235,4 +239,42 @@ void callbackDispatcher() {
 
     return Future.value(true);
   });
+}
+
+String buildnotification(List<dynamic> result) {
+  List<dynamic> comments = [];
+  List<dynamic> follow = [];
+  List<dynamic> likes = [];
+  for (var element in result) {
+    print(element['_type']);
+    if (element['_type'] == 'LIKE') {
+      likes.add(element);
+    } else if (element['_type'] == 'COMMENT') {
+      comments.add(element);
+    } else if (element['_type'] == 'FOLLOW') {
+      follow.add(element);
+    }
+  }
+
+  if (comments.isNotEmpty && follow.isNotEmpty && likes.isNotEmpty) {
+    return "You have ${comments.length} new comments, ${likes.length} likes, and ${follow.length} new followers";
+  } else if (comments.isNotEmpty && follow.isNotEmpty) {
+    return "${comments.length} new comments on your post and ${follow.length} new followers.";
+  } else if (comments.isNotEmpty && likes.isNotEmpty) {
+    return "You have ${comments.length} new comments and ${likes.length} likes on your posts.";
+  } else if (comments.isNotEmpty) {
+    if (comments.length == 1) {
+      return "You have ${comments.length} new comment on your post.";
+    }
+    return "${comments.length} new comments on you post.";
+  } else if (likes.isNotEmpty) {
+    if (likes.length == 1) {
+      return "You have ${likes.length} new like on your post.";
+    }
+    return "${likes.length} new people liked your post.";
+  } else if (follow.isNotEmpty) {
+    return "${follow.length} people started following you.";
+  } else {
+    return "You have some notifications in your activity feed.";
+  }
 }

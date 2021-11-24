@@ -1,3 +1,5 @@
+import 'package:social_media/screens/verify-email/verify_email.dart';
+
 import '../../animation.dart';
 import 'upload_profile.dart';
 
@@ -22,14 +24,8 @@ class CreateUser extends StatelessWidget {
         body: BlocConsumer<CreateUserCubit, CreateUserState>(
           listener: (context, state) {
             if (state.status == UserStatus.error) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  duration: const Duration(seconds: 4),
-                  dismissDirection: DismissDirection.horizontal,
-                  backgroundColor: Colors.redAccent,
-                  content: Text(state.error!),
-                ),
-              );
+              showSnackBarToPage(
+                  context, 'Internal Server Error', Colors.redAccent);
             }
             if (state.status == UserStatus.success) {
               Navigator.of(context).pushReplacement(

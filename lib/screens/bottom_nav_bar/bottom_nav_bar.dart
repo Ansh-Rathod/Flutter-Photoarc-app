@@ -54,11 +54,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         builder: (context, state) {
           if (state.status == CurrentUserStatus.loading) {
             return Scaffold(
+              extendBody: true,
               body: Center(
                 child: Image.asset(
                   'assets/fonts/depositphotos_83057730-stock-illustration-p-letter-monogram-logo-removebg-preview.png',
-                  width: 300,
-                  height: 300,
+                  width: 350,
+                  height: 350,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -73,7 +74,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     width: .4,
                   ),
                 ),
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.transparent,
                 onTap: (index) {
                   if (index == 2) {
                     BlocProvider.of<CurrentUserCubit>(context).changeIcon();

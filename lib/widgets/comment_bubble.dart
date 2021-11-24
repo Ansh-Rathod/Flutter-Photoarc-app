@@ -31,7 +31,7 @@ class CommentBubbble extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyText1,
             ),
             TextSpan(
-              text: '\n ' +
+              text: '\n' +
                   StringExtension.displayTimeAgoFromTimestamp(
                     comment.commentCreatedAt,
                   ),

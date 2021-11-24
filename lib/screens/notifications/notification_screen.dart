@@ -119,6 +119,7 @@ class NotificationPage extends StatelessWidget {
                       child: ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
+                          reverse: true,
                           itemCount: Hive.box('notifications').length,
                           itemBuilder: (context, i) {
                             var box = Hive.box('notifications');
