@@ -98,7 +98,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     icon: !state.isNote
                         ? const Icon(CupertinoIcons.bell)
                         : const Icon(
-                            Icons.notifications_active,
+                            Icons.notifications_active_outlined,
                             color: Colors.orange,
                           ),
                     activeIcon: const Icon(CupertinoIcons.bell_solid),
