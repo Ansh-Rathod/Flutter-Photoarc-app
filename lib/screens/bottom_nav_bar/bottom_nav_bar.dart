@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../models/user_model.dart';
 import 'cubit/current_user_cubit.dart';
 import '../feed/feed.dart';
@@ -114,12 +117,45 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
             );
           } else if (state.status == CurrentUserStatus.error) {
-            return Center(
-              child: Text(
-                "Something went wrong",
-                style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontSize: 24,
-                    ),
+            return Scaffold(
+              body: Container(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '404',
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "User not found",
+                        style: Theme.of(context).textTheme.headline1!.copyWith(
+                              fontSize: 20,
+                            ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ButtonTheme(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              launch(
+                                  'mailto:anshrathod322@gmail.com?subject=Bug report (Photoarc)&body=Hi,i want to report a bug.');
+                            },
+                            child: const Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: Text("Report an issue"),
+                            )),
+                      )
+                    ],
+                  ),
+                ),
               ),
             );
           } else {

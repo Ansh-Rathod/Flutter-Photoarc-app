@@ -18,6 +18,7 @@ class UserEvents {
   Future<bool> follow(String userId, String followerId) async {
     var info = jsonEncode({
       "follower_id": followerId,
+      "time_at": DateTime.now().toString(),
       "user_id": userId,
     });
     var url = Uri.parse(

@@ -158,7 +158,7 @@ class Settings extends StatelessWidget {
                   minLeadingWidth: 20,
                   onTap: () {
                     launch(
-                        'https://github.com/Ansh-Rathod/Flutter-Social-media-app');
+                        'https://github.com/Ansh-Rathod/Flutter-Photoarc-app');
                   },
                   leading: Icon(
                     CupertinoIcons.star,
