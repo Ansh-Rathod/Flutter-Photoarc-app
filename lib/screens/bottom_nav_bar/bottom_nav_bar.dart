@@ -75,6 +75,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 ),
                 backgroundColor: Colors.black,
                 onTap: (index) {
+                  if (index == 2) {
+                    BlocProvider.of<CurrentUserCubit>(context).changeIcon();
+                  }
                   setState(() {
                     currentIndex = index;
                   });
@@ -94,18 +97,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   BottomNavigationBarItem(
                     icon: !state.isNote
                         ? const Icon(CupertinoIcons.bell)
-                        : InkWell(
-                            onTap: () {
-                              BlocProvider.of<CurrentUserCubit>(context)
-                                  .changeIcon();
-                              setState(() {
-                                currentIndex = 2;
-                              });
-                            },
-                            child: const Icon(
-                              CupertinoIcons.bell,
-                              color: Colors.orange,
-                            ),
+                        : const Icon(
+                            CupertinoIcons.bell,
+                            color: Colors.orange,
                           ),
                     activeIcon: const Icon(CupertinoIcons.bell_solid),
                   ),
@@ -118,43 +112,41 @@ class _BottomNavBarState extends State<BottomNavBar> {
             );
           } else if (state.status == CurrentUserStatus.error) {
             return Scaffold(
-              body: Container(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '404',
-                        style: TextStyle(
-                          fontSize: 40,
-                          color: Theme.of(context).primaryColor,
-                        ),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '404',
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Theme.of(context).primaryColor,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "User not found",
-                        style: Theme.of(context).textTheme.headline1!.copyWith(
-                              fontSize: 20,
-                            ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ButtonTheme(
-                        child: ElevatedButton(
-                            onPressed: () {
-                              launch(
-                                  'mailto:anshrathod322@gmail.com?subject=Bug report (Photoarc)&body=Hi,i want to report a bug.');
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text("Report an issue"),
-                            )),
-                      )
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "User not found",
+                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                            fontSize: 20,
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ButtonTheme(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            launch(
+                                'mailto:anshrathod322@gmail.com?subject=Bug report (Photoarc)&body=Hi,i want to report a bug.');
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: Text("Report an issue"),
+                          )),
+                    )
+                  ],
                 ),
               ),
             );
