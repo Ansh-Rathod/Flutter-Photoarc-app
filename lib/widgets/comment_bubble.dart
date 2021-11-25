@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media/widgets/readmore.dart';
 import '../api/extension.dart';
 import '../models/comment_model.dart';
 import 'user_profile.dart';
@@ -14,32 +15,42 @@ class CommentBubbble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: UserProfile(
-          size: 50,
-          url: comment.avatarUrl,
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        title: Text(
-          comment.name,
-          style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 20),
-        ),
-        subtitle: RichText(
-          text:
-              TextSpan(style: Theme.of(context).textTheme.bodyText1, children: [
-            TextSpan(
-              text: comment.comment,
-              style: Theme.of(context).textTheme.bodyText1,
+      leading: UserProfile(
+        size: 50,
+        url: comment.avatarUrl,
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      title: Text(
+        comment.name,
+        style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 20),
+      ),
+      subtitle: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ReadMoreText(
+            comment.comment,
+            trimLines: 2,
+            style: Theme.of(context).textTheme.bodyText1,
+            colorClickableText: Theme.of(context).primaryColor,
+            trimMode: TrimMode.line,
+            trimCollapsedText: 'Show more',
+            trimExpandedText: 'Show less',
+            moreStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
             ),
-            TextSpan(
-              text: '\n' +
-                  StringExtension.displayTimeAgoFromTimestamp(
-                    comment.commentCreatedAt,
-                  ),
-              style:
-                  Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
+          ),
+          Text(
+            StringExtension.displayTimeAgoFromTimestamp(
+              comment.commentCreatedAt,
             ),
-          ]),
-        ));
+            style:
+                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
+          ),
+        ],
+      ),
+    );
     // Container(
     //   padding: const EdgeInsets.all(16),
     //   child: Column(

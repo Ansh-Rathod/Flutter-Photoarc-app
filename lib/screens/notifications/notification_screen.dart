@@ -6,6 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:social_media/api/extension.dart';
 import 'package:social_media/models/notifications.dart';
 import 'package:social_media/screens/show-shared-post/show_shared_post.dart';
+import 'package:social_media/widgets/readmore.dart';
 
 import '../../animation.dart';
 import '../../models/user_model.dart';
@@ -69,6 +70,10 @@ class NotificationPage extends StatelessWidget {
               BlocProvider.of<NotificationsBloc>(context).add(
                 DeleteAllNotifications(userId: currentUser.id),
               );
+              var box = Hive.box('notifications');
+              List values = box.values.toList();
+              values.sort((a, b) => a['time_at'].compareTo(b['time_at']));
+
               return CustomScrollView(
                 slivers: [
                   CupertinoSliverNavigationBar(
@@ -120,10 +125,9 @@ class NotificationPage extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           reverse: true,
-                          itemCount: Hive.box('notifications').length,
+                          itemCount: values.length,
                           itemBuilder: (context, i) {
-                            var box = Hive.box('notifications');
-                            var json = box.getAt(i);
+                            var json = values[i];
                             final notification =
                                 NotificationModel.fromJson(json);
                             return Dismissible(
@@ -179,33 +183,38 @@ class NotificationPage extends StatelessWidget {
                                             fontSize: 20,
                                           ),
                                     ),
-                                    subtitle: RichText(
-                                      text: TextSpan(
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1!
-                                            .copyWith(
-                                              fontSize: 16,
-                                            ),
-                                        children: [
-                                          TextSpan(
-                                              text: buildText(notification)),
-                                          TextSpan(
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1!
-                                                .copyWith(
-                                                  fontSize: 16,
-                                                  color: Colors.grey.shade300,
-                                                ),
-                                            text: "\n" +
-                                                StringExtension
-                                                    .displayTimeAgoFromTimestamp(
-                                                  notification.timeAt,
-                                                ),
-                                          )
-                                        ],
-                                      ),
+                                    subtitle: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ReadMoreText(
+                                          buildText(notification),
+                                          trimLines: 2,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                          colorClickableText:
+                                              Theme.of(context).primaryColor,
+                                          trimMode: TrimMode.line,
+                                          trimCollapsedText: 'Show more',
+                                          trimExpandedText: 'Show less',
+                                          moreStyle: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          StringExtension
+                                              .displayTimeAgoFromTimestamp(
+                                            notification.timeAt,
+                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .copyWith(fontSize: 14),
+                                        ),
+                                      ],
                                     ),
                                     trailing: notification.type == 'COMMENT' ||
                                             notification.type == 'LIKE'
