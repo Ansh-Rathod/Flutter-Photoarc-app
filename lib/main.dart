@@ -229,13 +229,12 @@ void callbackDispatcher() {
     try {
       final result = await repo
           .getNotifications(genrateId(FirebaseAuth.instance.currentUser!.uid));
-      print(result);
       if (result.isNotEmpty) {
         String text = buildnotification(result);
-        print(text);
         showNotification(text, flp);
       }
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
     }
 

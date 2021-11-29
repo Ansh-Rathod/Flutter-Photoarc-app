@@ -147,6 +147,4 @@ This features will be added in next version of the app.
 
 - add muliple images in post.
 - add reply to and like to comments.
-- add notifications from api.
-- add activity notifications sorting stay new on top.
 - add status feature.
