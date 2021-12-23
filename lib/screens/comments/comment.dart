@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/user_model.dart';
-import 'cubit/comments_cubit.dart';
 import '../../widgets/comment_bubble.dart';
 import '../../widgets/loading/search_page_loading.dart';
+import 'cubit/comments_cubit.dart';
 
 class CommentScreen extends StatefulWidget {
   final String userId;
@@ -65,7 +65,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                       size: 90),
                                   const SizedBox(height: 10),
                                   Text(
-                                    "Be frist in Comments".toUpperCase(),
+                                    "Be first in Comments".toUpperCase(),
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context)
                                         .textTheme

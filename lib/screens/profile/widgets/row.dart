@@ -116,7 +116,7 @@ class RowInfo extends StatelessWidget {
             if (state.currentProfile.username != '')
               Text(
                 '@' + state.currentProfile.username,
-                style:Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             const SizedBox(
               height: 4,
@@ -164,12 +164,11 @@ class RowInfo extends StatelessWidget {
                       image: state.currentProfile.avatarUrl,
                       title: state.currentProfile.name,
                       url:
-                          'https://ansh-rathod-blog.netlify.app/socialapp?userId=${state.currentProfileId}&type=up',
+                          'https://anshrathod.vercel.app/socialapp?userId=${state.currentProfileId}&type=up',
                     );
-                    Share.share(
-                        'Check out this profile on $url social media app like instagram made in flutter with 💙',
+                    Share.share('Check out this profile on Photoarc app $url',
                         subject:
-                            'social media app like instagram made in flutter with 💙');
+                            'Made in flutter with 💙');
                   },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(vertical: 13.0),

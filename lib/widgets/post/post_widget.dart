@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../animation.dart';
 import '../../api/extension.dart';
@@ -17,10 +18,9 @@ import '../../screens/comments/comment.dart';
 import '../../screens/post-liked-by/post_liked_by.dart';
 import '../../screens/profile/profile.dart';
 import '../../screens/verify-email/verify_email.dart';
-import 'cubit/post_cubit.dart';
 import '../readmore.dart';
 import '../user_profile.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'cubit/post_cubit.dart';
 
 class PostWidget extends StatefulWidget {
   final PostModel post;
@@ -316,12 +316,11 @@ class _PostWidgetState extends State<PostWidget> {
                                       title:
                                           'Check out this post by ${state.post.name}',
                                       url:
-                                          'https://ansh-rathod-blog.netlify.app/socialapp?post_user_id=${state.post.userId}&post_id=${state.post.postId}&type=post',
+                                          'https://anshrathod.vercel.app/socialapp?post_user_id=${state.post.userId}&post_id=${state.post.postId}&type=post',
                                     );
                                     Share.share(
-                                        'Check out this post on $url social media app like instagram made in flutter with 💙 by @${state.post.name}',
-                                        subject:
-                                            'social media app like instagram made in flutter with 💙');
+                                        'Check out this post $url on Photoarc app',
+                                        subject: 'Made in flutter with 💙');
                                   },
                                   child: const Icon(
                                     CupertinoIcons.share,

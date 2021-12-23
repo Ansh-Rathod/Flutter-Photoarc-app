@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-
 import 'package:social_media/models/user_model.dart';
 import 'package:social_media/screens/edit-profile/cubit/update_user_cubit.dart';
 
@@ -152,7 +151,7 @@ class _UpdateUserState extends State<UpdateUser> {
                             child: Text(
                               state.status != UserStatus.loading
                                   ? "UPDATE DETAILS".toUpperCase()
-                                  : "UPDATEING..".toUpperCase(),
+                                  : "UPDATING..".toUpperCase(),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
