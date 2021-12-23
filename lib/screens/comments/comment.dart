@@ -107,9 +107,11 @@ class _CommentScreenState extends State<CommentScreen> {
                                         },
                                         child: CommentBubbble(
                                           comment: comment,
+                                          currentUser: widget.currentUser,
                                         ),
                                       )
                                     : CommentBubbble(
+                                        currentUser: widget.currentUser,
                                         comment: comment,
                                       );
                               },

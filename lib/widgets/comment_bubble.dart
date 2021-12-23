@@ -1,20 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media/animation.dart';
+import 'package:social_media/models/user_model.dart';
+import 'package:social_media/screens/profile/profile.dart';
 import 'package:social_media/widgets/readmore.dart';
+
 import '../api/extension.dart';
 import '../models/comment_model.dart';
 import 'user_profile.dart';
 
 class CommentBubbble extends StatelessWidget {
   final CommentModel comment;
+  final UserModel currentUser;
   const CommentBubbble({
     Key? key,
     required this.comment,
+    required this.currentUser,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+            context,
+            createRoute(ProfileScreen(
+              currentUser: currentUser,
+              id: comment.commenterUserId,
+            )));
+      },
       leading: UserProfile(
         size: 50,
         url: comment.avatarUrl,
