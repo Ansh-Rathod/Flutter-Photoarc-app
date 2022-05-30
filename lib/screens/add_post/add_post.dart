@@ -7,9 +7,8 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../models/user_model.dart';
-import '../verify-email/verify_email.dart';
 import '../../widgets/post_image.dart';
-
+import '../verify-email/verify_email.dart';
 import 'cubit/upload_image_cubit.dart';
 
 class AddPost extends StatefulWidget {
@@ -95,26 +94,20 @@ class _AddPostState extends State<AddPost> {
                               final pickedFile = await ImagePicker()
                                   .pickImage(source: ImageSource.gallery);
 
-                              File? croppedFile = await ImageCropper.cropImage(
-                                  sourcePath: pickedFile!.path,
-                                  aspectRatioPresets: [
-                                    CropAspectRatioPreset.square,
-                                    CropAspectRatioPreset.ratio3x2,
-                                    CropAspectRatioPreset.original,
-                                    CropAspectRatioPreset.ratio4x3,
-                                    CropAspectRatioPreset.ratio16x9
-                                  ],
-                                  androidUiSettings: const AndroidUiSettings(
-                                    toolbarTitle: 'Crop Your image.',
-                                    toolbarColor: Colors.black,
-                                    toolbarWidgetColor: Colors.white,
-                                  ),
-                                  iosUiSettings: const IOSUiSettings(
-                                    minimumAspectRatio: 1.0,
-                                  ));
+                              CroppedFile? croppedFile =
+                                  await ImageCropper().cropImage(
+                                sourcePath: pickedFile!.path,
+                                aspectRatioPresets: [
+                                  CropAspectRatioPreset.square,
+                                  CropAspectRatioPreset.ratio3x2,
+                                  CropAspectRatioPreset.original,
+                                  CropAspectRatioPreset.ratio4x3,
+                                  CropAspectRatioPreset.ratio16x9
+                                ],
+                              );
 
                               BlocProvider.of<UploadImageCubit>(context)
-                                  .updateImage(croppedFile!);
+                                  .updateImage(File(croppedFile!.path));
                             },
                             child: PostImage(path: state.image),
                           ),

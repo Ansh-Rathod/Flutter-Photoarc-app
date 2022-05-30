@@ -25,13 +25,7 @@ Future<Uri> getUrl({
     ),
   );
 
-  final Uri dynamicUrl = await parameters.buildUrl();
-  final ShortDynamicLink shortenedLink = await DynamicLinkParameters.shortenUrl(
-    dynamicUrl,
-    DynamicLinkParametersOptions(
-        shortDynamicLinkPathLength: ShortDynamicLinkPathLength.unguessable),
-  );
+  final Uri dynamicUrl = parameters.link;
 
-  final Uri shortUrl = shortenedLink.shortUrl;
-  return shortUrl;
+  return dynamicUrl;
 }

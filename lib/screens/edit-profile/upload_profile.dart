@@ -51,22 +51,14 @@ class UpdateProfile extends StatelessWidget {
                               final pickedFile = await ImagePicker()
                                   .pickImage(source: ImageSource.gallery);
 
-                              File? croppedFile = await ImageCropper.cropImage(
-                                  sourcePath: pickedFile!.path,
-                                  cropStyle: CropStyle.rectangle,
-                                  aspectRatioPresets: [
-                                    CropAspectRatioPreset.square,
-                                  ],
-                                  androidUiSettings: const AndroidUiSettings(
-                                      toolbarTitle: 'Cropper',
-                                      toolbarColor: Colors.black,
-                                      toolbarWidgetColor: Colors.white,
-                                      initAspectRatio:
-                                          CropAspectRatioPreset.square,
-                                      lockAspectRatio: true),
-                                  iosUiSettings: const IOSUiSettings(
-                                    minimumAspectRatio: 1.0,
-                                  ));
+                              CroppedFile? croppedFile =
+                                  await ImageCropper().cropImage(
+                                sourcePath: pickedFile!.path,
+                                cropStyle: CropStyle.rectangle,
+                                aspectRatioPresets: [
+                                  CropAspectRatioPreset.square,
+                                ],
+                              );
                               if (croppedFile != null) {
                                 BlocProvider.of<CreateUserCubit>(context)
                                     .addImage(

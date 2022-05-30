@@ -2,15 +2,13 @@
 
 import 'dart:io';
 
-import 'package:social_media/screens/bottom_nav_bar/bottom_nav_bar.dart';
-import 'package:social_media/screens/create-user/cubit/create_user_cubit.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:social_media/screens/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:social_media/screens/create-user/cubit/create_user_cubit.dart';
 import 'package:social_media/screens/verify-email/verify_email.dart';
 import 'package:social_media/widgets/user_profile.dart';
 
@@ -55,22 +53,14 @@ class AddProfile extends StatelessWidget {
                               final pickedFile = await ImagePicker()
                                   .pickImage(source: ImageSource.gallery);
 
-                              File? croppedFile = await ImageCropper.cropImage(
-                                  sourcePath: pickedFile!.path,
-                                  cropStyle: CropStyle.rectangle,
-                                  aspectRatioPresets: [
-                                    CropAspectRatioPreset.square,
-                                  ],
-                                  androidUiSettings: const AndroidUiSettings(
-                                      toolbarTitle: 'Cropper',
-                                      toolbarColor: Colors.black,
-                                      toolbarWidgetColor: Colors.white,
-                                      initAspectRatio:
-                                          CropAspectRatioPreset.square,
-                                      lockAspectRatio: true),
-                                  iosUiSettings: const IOSUiSettings(
-                                    minimumAspectRatio: 1.0,
-                                  ));
+                              CroppedFile? croppedFile =
+                                  await ImageCropper().cropImage(
+                                sourcePath: pickedFile!.path,
+                                cropStyle: CropStyle.rectangle,
+                                aspectRatioPresets: [
+                                  CropAspectRatioPreset.square,
+                                ],
+                              );
                               if (croppedFile != null) {
                                 BlocProvider.of<CreateUserCubit>(context)
                                     .addImage(
