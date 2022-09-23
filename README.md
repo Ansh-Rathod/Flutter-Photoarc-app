@@ -3,14 +3,12 @@
 A Fully functional social media app written in flutter and dart using node.js and Postgres SQL as backend.
 [Backend Repository](https://github.com/Ansh-Rathod/Photoarc-app-backend-nodejs)
 
-## **Demo**
-
+## Logo
 <p align="center">
 <img src="screenshots/Screenshot_20211119-194607.png" alt="logo" width="30%"/>
 
-<h3 align="center"><a href="https://github.com/Ansh-Rathod/Flutter-Social-media-photoarc-app/releases/download/v1.0.0/app-armeabi-v7a-release.apk">Download the release APK</a></h3>
 </p>
-## **Features**
+## Features
 
 - custom photo feed based on following users'.
 - Users can post an image of any height.
@@ -42,11 +40,11 @@ A Fully functional social media app written in flutter and dart using node.js an
 
 <br/>
 
-## **Image Gallery**
+## Image Gallery
 
 <hr/>
 
-### **feed screen**
+### feed screen
 
 <br>
 
@@ -57,7 +55,7 @@ A Fully functional social media app written in flutter and dart using node.js an
 </p>
 <hr/>
 
-### **Search page**
+### Search page
 
 <br>
 
@@ -68,7 +66,7 @@ A Fully functional social media app written in flutter and dart using node.js an
 </p>
 <hr/>
 
-### **Activity page**
+### Activity page
 
 <br>
 
@@ -79,7 +77,7 @@ A Fully functional social media app written in flutter and dart using node.js an
 </p>
 <hr/>
 
-### **Profile page**
+### Profile page
 
 <br>
 
@@ -90,7 +88,7 @@ A Fully functional social media app written in flutter and dart using node.js an
 </p>
 <hr/>
 
-## **Dependencies**
+## Dependencies
 
 - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
 - [firebase_auth](https://pub.dev/packages/firebase_auth)
@@ -112,7 +110,7 @@ A Fully functional social media app written in flutter and dart using node.js an
 - [flutter_phoenix](https://pub.dev/packages/flutter_phoenix)
 - [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter)
 
-## **How to run?**
+## How to run?
 
 To clone and run this application, you'll need [Git](https://git-scm.com/downloads) and [Flutter](https://flutter.dev/docs/get-started/install) installed on your computer. From your command line:
 
@@ -139,11 +137,3 @@ $ flutter packages get
 ```bash
 $ flutter run
 ```
-
-## **What's Next?**
-
-This features will be added in next version of the app.
-
-- add muliple images in post.
-- add reply to and like to comments.
-- add status feature.
